@@ -4,7 +4,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import os
 import json
 
-st.title("📊 Data Entry App")
+st.title("📊 Google Sheet Data Entry")
 
 scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/drive"]
 
