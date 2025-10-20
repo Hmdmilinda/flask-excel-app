@@ -6,9 +6,8 @@ import json
 
 st.title("📊 Data Entry App")
 
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/drive"]
 
-# Load credentials from Streamlit secret
 creds_json = json.loads(os.environ["GOOGLE_CREDENTIALS"])
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
 client = gspread.authorize(creds)
