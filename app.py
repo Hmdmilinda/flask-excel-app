@@ -1,20 +1,20 @@
 import streamlit as st
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import os
 import json
-from oauth2client.service_account import ServiceAccountCredentials
+import os
 
-# Set up Google Sheets connection
+st.title("📊 Data Entry App")
+
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+
+# Load credentials from Streamlit secrets
 creds_json = json.loads(os.environ["GOOGLE_CREDENTIALS"])
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
 client = gspread.authorize(creds)
+
 sheet = client.open("App_Data").sheet1
 
-# Streamlit UI
-st.title("📊 Data Entry App")
 name = st.text_input("Enter Name")
 value = st.number_input("Enter Value", step=1)
 
@@ -23,4 +23,4 @@ if st.button("Submit"):
         sheet.append_row([name, value])
         st.success("✅ Data submitted successfully!")
     else:
-        st.warning("⚠️ Please fill all fields before submitting.")
+        st.warning("⚠️ Please fill all fields.")
